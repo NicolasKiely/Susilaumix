@@ -1,0 +1,34 @@
+CTreeStructBuilder_objs=bin/util/CTreeStructBuilder/main.o \
+bin/util/CTreeStructBuilder/common.o \
+bin/util/CTreeStructBuilder/structure.o \
+bin/util/CTreeStructBuilder/loader.o \
+bin/util/CTreeStructBuilder/parser.o
+
+CTreeStructBuilder_hdrs=src/util/CTreeStructBuilder/header.h \
+src/util/CTreeStructBuilder/structure.h \
+src/util/CTreeStructBuilder/loader.h \
+src/util/CTreeStructBuilder/parser.h
+
+
+util/CTreeStructBuilder/builder: $(CTreeStructBuilder_objs)
+	$(cmplr) $(flags) -g -o util/CTreeStructBuilder/builder $(CTreeStructBuilder_objs)
+
+bin/util/CTreeStructBuilder/main.o: src/util/CTreeStructBuilder/main.c \
+$(CTreeStructBuilder_hdrs)
+	$(cmplr) $(flags) -o bin/util/CTreeStructBuilder/main.o -c src/util/CTreeStructBuilder/main.c
+	
+bin/util/CTreeStructBuilder/common.o: src/util/CTreeStructBuilder/common.c \
+$(CTreeStructBuilder_hdrs)
+	$(cmplr) $(flags) -o bin/util/CTreeStructBuilder/common.o -c src/util/CTreeStructBuilder/common.c
+
+bin/util/CTreeStructBuilder/structure.o: src/util/CTreeStructBuilder/structure.c \
+$(CTreeStructBuilder_hdrs)
+	$(cmplr) $(flags) -o bin/util/CTreeStructBuilder/structure.o -c src/util/CTreeStructBuilder/structure.c
+
+bin/util/CTreeStructBuilder/loader.o: src/util/CTreeStructBuilder/loader.c \
+$(CTreeStructBuilder_hdrs)
+	$(cmplr) $(flags) -o bin/util/CTreeStructBuilder/loader.o -c src/util/CTreeStructBuilder/loader.c
+
+bin/util/CTreeStructBuilder/parser.o: src/util/CTreeStructBuilder/parser.c \
+$(CTreeStructBuilder_hdrs)
+	$(cmplr) $(flags) -o bin/util/CTreeStructBuilder/parser.o -c src/util/CTreeStructBuilder/parser.c

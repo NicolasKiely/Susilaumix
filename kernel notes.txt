@@ -1,0 +1,38 @@
+Kernel:
+	- Boot up
+	- Check config file
+	- runs plugin loader
+	- Pass off execution
+
+plugin manager:
+	- Loads dll
+	- Hold plugin context structure:
+		plugin name
+		plugin path
+		service mappings
+		Misc info
+		Plugin properties
+
+	
+Command line:
+./<server name> --config_file [config file]
+
+
+Config File:
+	>pluginloader=[pluginloader directory]
+	
+	
+Data structures:
+	- Integer
+	- String
+	- List/Tree
+	- Version number
+	- Hash table
+	
+	
+
+Plugin Directory format:
+	~/plugin.txt : First file read by server during loading, contains
+		config information
+	~/lib[plugin names].so: Plugin binaries
+		

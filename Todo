@@ -1,0 +1,31 @@
+_ Not started
+. Worker on, not finished
++ Mostly finished, needs testing
+x Testing started
+X Test code finished
+
+
+[.] Kernel
+	[+] Config reader
+		[+] File Loader
+		[+] Record parser
+	[ ] Plugin loading
+		[ ] lib loader
+		[ ] service mapping
+		[ ] Function passing
+		[ ] Service calls
+		[ ] Kernel services
+		[ ] Plugin info
+[ ] Summoner
+	[ ] Summoner config reading
+	[ ] plugin loader
+		[ ] plugin config loader
+		[ ] plugin info loader
+			[ ] Author info
+			[ ] Todo info
+			[ ] Readme info
+			[ ] Help info
+			[ ] Doc info
+			[ ] Bugs info
+[ ] Interface
+	[ ] Command line interface

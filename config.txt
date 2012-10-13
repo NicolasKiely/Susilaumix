@@ -1,0 +1,5 @@
+pluginLoader = libPluginSummoner.so
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789=,./;'[]
+
+other = test
+
