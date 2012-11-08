@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "parser.h"
 #include "loader.h"
@@ -69,7 +70,7 @@ struct str *buildStr(struct token *pToken){
 	
 	if (pToken == NULL) return NULL;
 	
-	/* Attempt to initialize root structure */
+	/* Attempt to initialize root structure. Root structure should be empty */
 	struct str *pStr = initStr();
 	struct str *pCurrentStr = pStr;
 	if (pStr == NULL) {
@@ -90,6 +91,8 @@ struct str *buildStr(struct token *pToken){
 		/* Get current state */
 		struct FSM_state *pCurrentState = pArray + state;
 		
+		/*!!!!! Check pCurrentStrfor null !!!!!*/
+		
 		/* Evaluate current state */
 		pCurrentState->evaluate(&(pCurrentStr), pCurrentToken);
 		
@@ -106,23 +109,53 @@ void es_NONE(struct str** ppStr, struct token* pToken){
 	/* Outside of structure, do nothing */
 }
 
+
 void es_ERROR(struct str** ppStr, struct token* pToken){
 	/* Error, display */
 	print("Error in parsing token '%s'\n", pToken->pText);
 }
 
+
 void es_STRUCTURE(struct str** ppStr, struct token* pToken){
-	/* Entering structure, do nothing */
+	/* Entering structure, create new structure to work with */
+	*ppStr->pNext = initStr();
+	if (*ppStr->pNext == NULL){
+		printf("Error, can not allocate new str in es_STRUCTURE\n");
+		*ppStr = NULL;
+		return;
+	}
+	
+	/* Increment pointer to next */
+	*ppStr = *ppStr->pNext;
 }
+
 
 void es_STRUCTURE_NAME(struct str** ppStr, struct token* pToken){
 	/* Setting structure name */
-	(*ppStr)->
+	(*ppStr)->pName = strdup(pToken->pText);
+	if ((*ppStr)->pName == NULL){
+		printf("Error, failed to get structure name in es_STRUCTURE_NAME\n");
+		*ppStr = NULL;
+		return;
+	}
 }
 
-void es_STRUCTURE_END(struct str**, struct token*);
-void es_VARIABLE(struct str**, struct token*);
-void es_VARIABLE_TYPE(struct str**, struct token*);
+
+void es_STRUCTURE_END(struct str**, struct token*){
+	/* End of structure, do nothing */
+}
+
+
+void es_VARIABLE(struct str**, struct token*){
+	/* Start of variable field */
+	
+}
+
+
+void es_VARIABLE_TYPE(struct str**, struct token*){
+	/* */
+}
+
 void es_VARIABLE_NAME(struct str**, struct token*);
 void es_VARIABLE_INIT(struct str**, struct token*);
 void es_BUFFER(struct str**, struct token*);
